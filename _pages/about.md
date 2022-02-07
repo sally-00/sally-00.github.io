@@ -16,7 +16,7 @@ news: true  # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
-My biography!!!!!!!!!!!!!
+Senior student at [Osaka University](https://www.osaka-u.ac.jp/en), Japan. Currenly conducting undergraduate research at [Dynamical Systems Control Lab](https://www-dsc-mech.eng.osaka-u.ac.jp/). Undergraduate thesis theme: multi-robot transportation system using flexible tactile sensor. Spent a year as an exchange student at [UC Berkeley](https://www.berkeley.edu/).
 
 Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
 

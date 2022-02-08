@@ -6,6 +6,4 @@ description: Under Construction.
 nav: true
 ---
 
-Under construction.
-
 Looking for TA oppotunities!

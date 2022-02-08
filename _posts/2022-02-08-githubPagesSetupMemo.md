@@ -1,0 +1,116 @@
+---
+layout: post
+title: Creating this website from zero using template with Jekyll and github pages
+date: 2022-02-07 17:39:00
+description: website memo
+tags: website, Jekyll, GithubPages
+---
+
+## Fork the theme and create repo
+first [fork](https://guides.github.com/activities/forking/) the theme from `github.com:alshedivat/al-folio` to `github.com:<your-username>/<your-repo-name>`
+Change repo name to `<your-username>.github.io` 
+
+## Install ruby using rbenv
+
+install ruby(using rbenv for managing ruby gems) and bundler
+basic information and installation of rbenv: [https://github.com/rbenv/rbenv](https://github.com/rbenv/rbenv)
+
+I installed using brew by using the following commands.
+```bash
+$ brew install rbenv
+$ brew upgrade rbenv ruby-build
+```
+Set up rbenv in the shell and verify the set up of rbenv using the following commands.
+```bash
+$ rbenv init
+$ curl -fsSL https://github.com/rbenv/rbenv-installer/raw/main/bin/rbenv-doctor | bash
+```
+But got error saying: Checking for rbenv shims in PATH: not found
+
+Tried adding 'eval "$(rbenv init -)"' to ~/.bash_profile:
+```bash
+$ source ~/.bash_profile
+$ echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
+```
+Did not work… Realized that I'm using zsh, not bash!!!
+Add the following lines to /Users/<username>/.zshrc
+```
+eval "$(rbenv init -)"
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
+```
+checked with 
+```bash
+$ curl -fsSL https://github.com/rbenv/rbenv-installer/raw/main/bin/rbenv-doctor | bash` 
+```
+again. All working fine now! 
+Install the latest stable version of Ruby using rbenv:
+(参考：[https://qiita.com/hujuu/items/3d600f2b2384c145ad12](https://qiita.com/hujuu/items/3d600f2b2384c145ad12))
+
+```bash
+$ rbenv install 3.1.0
+```
+Got error… error including the following:
+BUILD FAILED (macOS 12.1 using ruby-build 20220125) In file included from compile.c:40: ./vm_callinfo.h:216:16: error: use of undeclared identifier 'RUBY_FUNCTION_NAME_STRING'     if (debug) rp(ci);  
+
+Tried the following:
+```bash
+$ RUBY_CFLAGS=-DUSE_FFI_CLOSURE_ALLOC rbenv install 3.1.0（それでもエラー出る）
+```
+Did not work for me…
+Some are saying about updating the command line tools. So:
+（わからんけど，一応コマンドラインツールを再インストールしてみる，https://qiita.com/marusho_summers/items/1022d5bbfd2f7856d2f8）
+```bash
+$ sudo rm -rf /Library/Developer/CommandLineTools
+$ xcode-select --install
+```
+
+これでもう一回$ rbenv install 3.1.0するといけた！！！
+現在のバージョンをチェック．
+```bash
+$ which ruby
+```
+まだシステムのrubyとかになっているから，バージョンをスイッチ．
+```bash
+$ rbenv global 3.1.0
+```
+これでruby
+bundlerをインストール．
+```bash
+$ gem install bundler
+```
+
+権限で上のコマンドを実行できなかった！パスを調べるとまだシステムの方にあった．
+rbenvにパスを通すため、シェルの設定ファイル(.bashrcや.zshrc)に以下を追加．（https://qiita.com/nishina555/items/63ebd4a508a09c481150）
+
+```bash
+[[ -d ~/.rbenv  ]] && \
+  export PATH=${HOME}/.rbenv/bin:${PATH} && \
+  eval "$(rbenv init -)"
+```
+
+which rubyとwhich gemでパスがrbenvの方にあることを確認．再び
+
+```bash
+$ gem install bundler
+```
+オッケー！！
+
+## Back to setting up the theme
+
+Use the following to clone repo to local and execute to see the website
+```bash
+$ git clone git@github.com:<username>/<username.github.io>.git
+$ cd <username.github.io>
+$ bundle install
+$ bundle exec jekyll serve
+```
+Now we can access the website through http://127.0.0.1:4000
+
+Make sure the following to ensure proper deploy:
+In git repo setting, pages, set source branch to gh-pages (not master).
+In the file `_config.yml`, set `url` to `https://<your-github-username>.github.io` and `baseurl` to `/<your-repository-name>/`
+
+↑これちゃんとできなかったら，ローカルではちゃんと表示されるけど，ウェブサイトでは変になる．
+## Folder structure
+`_posts` : naming of the file must follow `Year-Month-Day-title.md`
+

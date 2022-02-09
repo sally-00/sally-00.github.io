@@ -104,13 +104,28 @@ $ cd <username.github.io>
 $ bundle install
 $ bundle exec jekyll serve
 ```
-Now we can access the website through http://127.0.0.1:4000
+After `$ bundle exec jekyll serve`, we can access the website through `http://127.0.0.1:4000`. Edits you made to the contents will be applied to it in real time.
 
-Make sure the following to ensure proper deploy:
-In git repo setting, pages, set source branch to gh-pages (not master).
-In the file `_config.yml`, set `url` to `https://<your-github-username>.github.io` and `baseurl` to `/<your-repository-name>/`
+Edit the contents of the website and push. Then deploy will be triggered automatically. You should be able to access the website through `https://<username>.github.io` in a few minutes after the whole process is done.
+
+Make sure you did the following to ensure proper deploy:
+- In git repo setting, pages, set source branch to gh-pages (not master).
+- In the file `_config.yml`, set `url` to `https://<your-github-username>.github.io` and `baseurl` to `/<your-repository-name>/`
 
 ↑これちゃんとできなかったら，ローカルではちゃんと表示されるけど，ウェブサイトでは変になる．
+
+I had the problem of pictures not being displayed in `http://127.0.0.1:4000`, but no problem on the `https://<username>.github.io`. It turned out that imagemagick was not installed. Used brew to install and then the pictures were generated with no problem:
+```bash
+$ brew install imagemagick
+```
+
+
 ## Folder structure
+Read: [https://jekyllrb.com/docs/structure/](https://jekyllrb.com/docs/structure/)
 `_posts` : naming of the file must follow `Year-Month-Day-title.md`
+
+## Finding website through Google search
+I could not reach my website through searching my name and some keywords…
+Turned out the reason was that Google has not indexed my website yet which is common with brand new websites.
+You can check by searching `site:<your_site_address>`
 

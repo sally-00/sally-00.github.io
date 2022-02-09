@@ -2,7 +2,7 @@
 layout: page
 title: Undergraduate thesis
 description: Multi-robot transportation system with flexible tactile sensor
-img: assets/img/12.jpg
+img: assets/img/undergradthesis.jpg
 importance: 1
 category: work
 ---

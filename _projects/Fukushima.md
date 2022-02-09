@@ -2,7 +2,7 @@
 layout: page
 title: Fukushima Project
 description: Measuring radiation in Fukushima
-img: assets/img/12.jpg
+img: assets/img/blueberry.jpg
 importance: 1
 category: fun
 ---
@@ -14,11 +14,11 @@ The program aims for deeper understanding in radiation. I attended as a member t
 The program includes field work in Fukushima where the nuclear disaster happened. There, we visited the still contaminated restricted sites and were able to hear a lot of information from local residents. We learned that people (even people in Japan) avoid buying food grown in Fukushima even when the radiation level is tested and shown to be safe. It is causing the food in Fukushima which used to be top delicious in Japan (eg. rice) to diminish or be sold as cheap ones. 
 
 <div class="row">
-    <div class="col-sm-8 mt-3 mt-md-0">
-        {% include figure.html path="assets/img/playground.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
     <div class="col-sm-4 mt-3 mt-md-0">
-        {% include figure.html path="assets/img/comtaminatedbags.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        {% include figure.html path="assets/img/playground.jpg" title="playground" class="img-fluid rounded z-depth-1" %}
+    </div>
+    <div class="col-sm-8 mt-3 mt-md-0">
+        {% include figure.html path="assets/img/comtaminatedbags.jpg" title="comtaminated bags" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
@@ -29,13 +29,13 @@ We took some blueberry grown in Fukushima from a farmer we visited and measured 
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/blueberry.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        {% include figure.html path="assets/img/blueberry.jpg" title="blueberry" class="img-fluid rounded z-depth-1" %}
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/tuchi.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        {% include figure.html path="assets/img/tuchi.jpg" title="soil samples" class="img-fluid rounded z-depth-1" %}
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/blueberryjam.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        {% include figure.html path="assets/img/blueberryjam.jpg" title="making blueberry jam" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">

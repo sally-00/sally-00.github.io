@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Creating this website from zero using template with Jekyll and github pages
+title: Setup this website from zero using template with Jekyll and github pages
 date: 2022-02-07 17:39:00
 description: website memo
 tags: website, Jekyll, GithubPages
@@ -44,7 +44,7 @@ $ curl -fsSL https://github.com/rbenv/rbenv-installer/raw/main/bin/rbenv-doctor 
 ```
 again. All working fine now! 
 Install the latest stable version of Ruby using rbenv:
-(参考：[https://qiita.com/hujuu/items/3d600f2b2384c145ad12](https://qiita.com/hujuu/items/3d600f2b2384c145ad12))
+(参考：[Qitta: rbenvでrubyのバージョンを管理する](https://qiita.com/hujuu/items/3d600f2b2384c145ad12))
 
 ```bash
 $ rbenv install 3.1.0
@@ -58,7 +58,7 @@ $ RUBY_CFLAGS=-DUSE_FFI_CLOSURE_ALLOC rbenv install 3.1.0（それでもエラ�
 ```
 Did not work for me…
 Some are saying about updating the command line tools. So:
-（わからんけど，一応コマンドラインツールを再インストールしてみる，https://qiita.com/marusho_summers/items/1022d5bbfd2f7856d2f8）
+（わからんけど，一応コマンドラインツールを再インストールしてみる．[Qiita: rbenvでrubyをインストールできなかったのでメモ](https://qiita.com/marusho_summers/items/1022d5bbfd2f7856d2f8)）
 ```bash
 $ sudo rm -rf /Library/Developer/CommandLineTools
 $ xcode-select --install
@@ -73,14 +73,13 @@ $ which ruby
 ```bash
 $ rbenv global 3.1.0
 ```
-これでruby
-bundlerをインストール．
+これでruby bundlerをインストール．
 ```bash
 $ gem install bundler
 ```
 
-権限で上のコマンドを実行できなかった！パスを調べるとまだシステムの方にあった．
-rbenvにパスを通すため、シェルの設定ファイル(.bashrcや.zshrc)に以下を追加．（https://qiita.com/nishina555/items/63ebd4a508a09c481150）
+権限の問題で上のコマンドを実行できなかった...パスを調べるとまだシステムの方にあった．
+rbenvにパスを通すため、シェルの設定ファイル(.bashrcや.zshrc)に以下を追加．([Qiita: gem installでpermissionエラーになった時の対応方法](https://qiita.com/nishina555/items/63ebd4a508a09c481150))
 
 ```bash
 [[ -d ~/.rbenv  ]] && \
@@ -122,7 +121,16 @@ $ brew install imagemagick
 
 ## Folder structure
 Read: [https://jekyllrb.com/docs/structure/](https://jekyllrb.com/docs/structure/)
+
 `_posts` : naming of the file must follow `Year-Month-Day-title.md`
+
+`_pages` : manage what pages are appearing (about, blog, projects, publications, teaching)
+
+`_news` : put news/announcements here
+
+`_posts` : put posts for blog here
+
+`_projects` : put projects here
 
 ## Finding website through Google search
 I could not reach my website through searching my name and some keywords…

@@ -15,12 +15,12 @@ Change repo name to `<your-username>.github.io`
 install ruby(using rbenv for managing ruby gems) and bundler
 basic information and installation of rbenv: [https://github.com/rbenv/rbenv](https://github.com/rbenv/rbenv)
 
-I installed using brew by using the following commands.
+I installed using brew:
 ```bash
 $ brew install rbenv
 $ brew upgrade rbenv ruby-build
 ```
-Set up rbenv in the shell and verify the set up of rbenv using the following commands.
+Set up rbenv in the shell and verify the setup of rbenv using the following commands.
 ```bash
 $ rbenv init
 $ curl -fsSL https://github.com/rbenv/rbenv-installer/raw/main/bin/rbenv-doctor | bash
@@ -38,11 +38,12 @@ Add the following lines to /Users/<username>/.zshrc
 eval "$(rbenv init -)"
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 ```
-checked with 
+checked again with:
 ```bash
 $ curl -fsSL https://github.com/rbenv/rbenv-installer/raw/main/bin/rbenv-doctor | bash` 
 ```
-again. All working fine now! 
+All working fine now! 
+
 Install the latest stable version of Ruby using rbenv:
 (参考：[Qitta: rbenvでrubyのバージョンを管理する](https://qiita.com/hujuu/items/3d600f2b2384c145ad12))
 
@@ -54,7 +55,7 @@ BUILD FAILED (macOS 12.1 using ruby-build 20220125) In file included from compil
 
 Tried the following:
 ```bash
-$ RUBY_CFLAGS=-DUSE_FFI_CLOSURE_ALLOC rbenv install 3.1.0（それでもエラー出る）
+$ RUBY_CFLAGS=-DUSE_FFI_CLOSURE_ALLOC rbenv install 3.1.0
 ```
 Did not work for me…
 Some are saying about updating the command line tools. So:
@@ -64,22 +65,24 @@ $ sudo rm -rf /Library/Developer/CommandLineTools
 $ xcode-select --install
 ```
 
-これでもう一回$ rbenv install 3.1.0するといけた！！！
-現在のバージョンをチェック．
+Did `$ rbenv install 3.1.0` again and it worked!!
+Check the version:
 ```bash
 $ which ruby
 ```
-まだシステムのrubyとかになっているから，バージョンをスイッチ．
+If it shows the system's ruby version, we need to switch the version.
 ```bash
 $ rbenv global 3.1.0
 ```
-これでruby bundlerをインストール．
+Now install ruby bundler.
 ```bash
 $ gem install bundler
 ```
 
-権限の問題で上のコマンドを実行できなかった...パスを調べるとまだシステムの方にあった．
-rbenvにパスを通すため、シェルの設定ファイル(.bashrcや.zshrc)に以下を追加．([Qiita: gem installでpermissionエラーになった時の対応方法](https://qiita.com/nishina555/items/63ebd4a508a09c481150))
+Couldn't do that because not permitted. When checking the version again, the path is still on the system side. The switch of the version was not successful!?
+
+To set ruby path to rbenv, add the following to shell setting file(.bashrc or .zshrc)．
+([Qiita: gem installでpermissionエラーになった時の対応方法](https://qiita.com/nishina555/items/63ebd4a508a09c481150))
 
 ```bash
 [[ -d ~/.rbenv  ]] && \
@@ -87,12 +90,12 @@ rbenvにパスを通すため、シェルの設定ファイル(.bashrcや.zshrc)
   eval "$(rbenv init -)"
 ```
 
-which rubyとwhich gemでパスがrbenvの方にあることを確認．再び
+check version using `which ruby` and `which gem` to make sure the path is on the rbenv side. Do installation again:
 
 ```bash
 $ gem install bundler
 ```
-オッケー！！
+Working now!!
 
 ## Back to setting up the theme
 
@@ -103,11 +106,11 @@ $ cd <username.github.io>
 $ bundle install
 $ bundle exec jekyll serve
 ```
-After `$ bundle exec jekyll serve`, we can access the website through `http://127.0.0.1:4000`. Edits you made to the contents will be applied to it in real time.
+After `$ bundle exec jekyll serve`, we can access the website through `http://127.0.0.1:4000`. Edits you made to the contents will be applied to it in real-time.
 
-Edit the contents of the website and push. Then deploy will be triggered automatically. You should be able to access the website through `https://<username>.github.io` in a few minutes after the whole process is done.
+Edit the contents of the website and push to git. Then deployment will be triggered automatically. You should be able to access the website through `https://<username>.github.io` in a few minutes after the whole process is done.
 
-Make sure you did the following to ensure proper deploy:
+Make sure you did the following to ensure proper deployment:
 - In git repo setting, pages, set source branch to gh-pages (not master).
 - In the file `_config.yml`, set `url` to `https://<your-github-username>.github.io` and `baseurl` to `/<your-repository-name>/`
 

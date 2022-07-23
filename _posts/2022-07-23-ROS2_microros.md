@@ -21,7 +21,8 @@ It was pretty smooth, didn't encounter any problem.
 
 Follow the microros install instruction on the [official microros website](https://micro.ros.org/docs/tutorials/core/first_application_linux/).
 Problems encountered:
-1. When using `sudo apt update && rosdep update`, rosdep has not been installed at this point. Use "sudo apt install python3-rosdep2" to install before running the command.
-2. When using `colcon build`, colcon has not been installed at this point. Use "sudo apt install python3-colcon-common-extensions"to install before runing the command.
+1. When using `sudo apt update && rosdep update`, rosdep has not been installed at this point. Use `sudo apt install python3-rosdep2` to install before running the command.
+2. When using `colcon build`, colcon has not been installed at this point. Use `sudo apt install python3-colcon-common-extensions`to install before runing the command.
 
+### Unsolved
 When running `ros2 run micro_ros_agent micro_ros_agent udp4 --port 8888`, there was no problem. But after running `ros2 run micro_ros_demos_rclc ping_pong` in another terminal, ping_pong is aborted with warning in rcl_node_init and rclc_node_init_with_options. Error also apeared in micro_ros_agent saying `[RTPS Error] Calculated port number is too high. Probably the domainID is over 232 or portBase is too high. -> Function getMulticasePort`

@@ -114,7 +114,8 @@ Make sure you did the following to ensure proper deployment:
 - In git repo setting, pages, set source branch to gh-pages (not master).
 - In the file `_config.yml`, set `url` to `https://<your-github-username>.github.io` and `baseurl` to `/<your-repository-name>/`
 
-↑これちゃんとできなかったら，ローカルではちゃんと表示されるけど，ウェブサイトでは変になる．
+↑ If you don't do this properly, the website will display well in the local but wired on the online website.
+これちゃんとできなかったら，ローカルではちゃんと表示されるけど，ウェブサイトでは変になる．
 
 I had the problem of pictures not being displayed in `http://127.0.0.1:4000`, but no problem on the `https://<username>.github.io`. It turned out that imagemagick was not installed. Used brew to install and then the pictures were generated with no problem:
 ```bash

@@ -23,4 +23,4 @@ During spare time, I enjoy hiking, baking and watching movies.
 
 I was born in Shanghai, China. Moved to Osaka, Japan with my family since 2012.
 
-[CV](https://drive.google.com/file/d/17ktqKct5r4Jb-RoBJ5EhL8pqWoXIf9pe/view?usp=sharing)  [CV in slides](https://docs.google.com/presentation/d/1soiq1jVbMsyJFFRQLz7Kfdl3blGDjhcP/edit?usp=sharing&ouid=107351715565826647552&rtpof=true&sd=true)
+[CV](https://drive.google.com/file/d/1SJE6APZ_Dh1xOhN9AH-4eEFYRnTyfu1H/view?usp=sharing)  [CV in slides](https://docs.google.com/presentation/d/1L8ciZzUFNu5g3KMWeC690bLXO50E_NA_/edit?usp=sharing&ouid=107351715565826647552&rtpof=true&sd=true)

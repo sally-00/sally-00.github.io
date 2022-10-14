@@ -11,14 +11,20 @@ To download online files:
 ```bash
 $ wget <the website>
 ```
+
 To permit execution of files:
 ```bash
 $ chmod +x <filename>
 ```
 
+To create a file:
+```bash
+$ touch <filename>
+```
+
 Add lines to a file:
 ```bash
-$ echo “some text” > folder/file
+$ echo “some text” > <folder/file>
 ```
 
 

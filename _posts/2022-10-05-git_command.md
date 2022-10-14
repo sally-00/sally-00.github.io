@@ -12,7 +12,7 @@ $ git clone repository_name
 ```
 
 To add locally hosted code to github: 
-Firstly, create a repo on github website. 
+Firstly, create a repo on the github website. 
 Secondly, do the following on the directory of the project: 
 ``` bash
 $ git init && git symbolic-ref HEAD refs/heads/main
@@ -45,3 +45,7 @@ $ git checkout <branch_name>
 # list all branch
 $ git branch -a
 ```
+
+To ignore files in the folder, create a file named ".gitignore" and put all the files' name inside.
+
+When pushing a cloned repo to github, [manage upstream depends on if you want to pull changes from that repo](https://stackoverflow.com/questions/18200248/cloning-a-repo-from-someone-elses-github-and-pushing-it-to-a-repo-on-my-github). More about origin and upstream [here](https://stackoverflow.com/questions/9257533/what-is-the-difference-between-origin-and-upstream-on-github).

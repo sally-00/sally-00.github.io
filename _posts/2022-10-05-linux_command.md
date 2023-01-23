@@ -17,15 +17,21 @@ To permit execution of files:
 $ chmod +x <filename>
 ```
 
-To create a file:
+Files Related
 ```bash
+# To create a file:
 $ touch <filename>
+# Add lines to a file:
+$ echo “some text” > <folder/file>
+# show content of a file:
+$ cat <file>
 ```
 
-Add lines to a file:
+search for package
 ```bash
-$ echo “some text” > <folder/file>
+$ apt-cache search <keyword>
 ```
+
 
 
 

@@ -49,3 +49,14 @@ $ git branch -a
 
 To ignore files in the folder, create a file named ".gitignore" and put all the files' name inside.
 
+Switching between different commits, temporarily and hard delete:
+[A good explanation here](https://stackoverflow.com/questions/4114095/how-do-i-revert-a-git-repository-to-a-previous-commit)
+
+Working with others:
+Pull the repo without it overwriting the changes you have made:
+```bash
+$ git stash
+$ git pull
+$ git stash pop
+```
+[source](https://stackoverflow.com/questions/19216411/how-do-i-pull-files-from-remote-without-overwriting-local-files)

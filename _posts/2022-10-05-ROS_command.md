@@ -22,7 +22,7 @@ Copy files from other package:
 $ roscp [package_name] [file_to_copy_path] [copy_from_this_path]
 ```
 
-
+Publish using command line
 ```bash
 $ rostopic pub <name of the topic> <type of the topic> [args...]
 # press TAB after rostopic pub <name of the topic> <type of the topic>, it auto fills the information needed
@@ -54,8 +54,16 @@ $ rosrun beginner_tutorials talker.py
 
 
 ``` bash
+# show all ros topic
+$ rostopic list
+# to check specific topic
+$ rostopic list | grep <topic_name>
 # show message type, subscriber, publisher
 $ rostopic info <name of the topic>
+# to measure the frequency of the image topic
+$ rostopic hz <topic_name>
 # show what is included in a topic
 $ rosmsg show <a topic type>
+# to display an image
+$ rqt_image_view <topic_name>
 ```

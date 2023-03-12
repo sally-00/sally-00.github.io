@@ -126,7 +126,11 @@ $ brew install imagemagick
 ## Folder structure
 Read: [https://jekyllrb.com/docs/structure/](https://jekyllrb.com/docs/structure/)
 
-`_posts` : naming of the file must follow `Year-Month-Day-title.md`
+Contents related file and folders:
+
+`_config.yaml`: stores configuration data.
+
+`_posts` : posts of the blog. Naming of the files must follow `Year-Month-Day-title.md`
 
 `_pages` : manage what pages are appearing (about, blog, projects, publications, teaching)
 
@@ -135,6 +139,10 @@ Read: [https://jekyllrb.com/docs/structure/](https://jekyllrb.com/docs/structure
 `_posts` : put posts for blog here
 
 `_projects` : put projects here
+
+Others:
+
+`_site`: generated site is placed here
 
 ## Finding website through Google search
 I could not reach my website through searching my name and some keywords…

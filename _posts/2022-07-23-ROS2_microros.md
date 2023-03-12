@@ -2,7 +2,7 @@
 layout: post
 title: ROS2 and microros
 date: 2022-07-18 17:39:00
-description: project memo
+description:
 tags: ROS2
 ---
 

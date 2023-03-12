@@ -2,7 +2,7 @@
 layout: post
 title: useful git command memo
 date: 2022-10-05 17:39:00
-description: project memo
+description: 
 tags: git
 ---
 

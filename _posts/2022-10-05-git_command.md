@@ -60,3 +60,11 @@ $ git pull
 $ git stash pop
 ```
 [source](https://stackoverflow.com/questions/19216411/how-do-i-pull-files-from-remote-without-overwriting-local-files)
+
+Or.
+
+Commit changes and then pull. Use `--rebase` so it is not a merge commit and the history wil be linear.
+```bash
+$ git pull --rebase
+```
+[git pull with local commits](https://happygitwithr.com/pull-tricky.html#git-pull-with-local-commits)

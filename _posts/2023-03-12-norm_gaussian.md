@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Why norm comes from the assumption that data is drawn from a Gaussian distribution?
+title: Why norm loss function comes from the assumption that data is drawn from a Gaussian distribution?
 date: 2023-03-12
 description: 
 tags: ML
@@ -24,12 +24,18 @@ $$
 \theta_{ML} = \Sigma^{m}_{i=1}log p_{model}(x^{(i)};\theta)
 $$
 Assuming that $p_{model}(x;\theta)$ follows a Gaussian distribution $p_{model}(x;\theta) \sim \mathcal{N}(\mu,1)$,
+
 $$
 \theta_{ML} = arg max_{\theta} \Sigma^{m}_{i=1}log p_{model}(x^{(i)};\theta) \\
+
 \theta_{ML} = arg max_{\theta} \Sigma^{m}_{i=1}log \frac{1}{\sqrt{2\pi}} exp(-(x-\theta)^2) \\
+
 \theta_{ML} = arg max_{\theta} \Sigma^{m}_{i=1}log \frac{1}{\sqrt{2\pi}} +(-(x-\theta)^2) \\
+
 \theta_{ML} = arg max_{\theta} -m log\sqrt{2\pi}-\Sigma^{m}_{i=1}(x-\theta)^2 \\
+
 \theta_{ML} = arg max_{\theta} -\Sigma^{m}_{i=1}(x-\theta)^2 \\
+
 \theta_{ML} = arg min_{\theta} \Sigma^{m}_{i=1}(x-\theta)^2 \\
 $$
 

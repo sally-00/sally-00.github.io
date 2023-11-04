@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://sally-00.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://sally-00.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2023-11-04T00:38:24+00:00</updated><id>https://sally-00.github.io/feed.xml</id><title type="html">blank</title><subtitle>A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
+</subtitle><entry><title type="html"></title><link href="https://sally-00.github.io/blog/2023/2022-02-25-ESP32/" rel="alternate" type="text/html" title="" /><published>2023-11-04T00:38:24+00:00</published><updated>2023-11-04T00:38:24+00:00</updated><id>https://sally-00.github.io/blog/2023/2022-02-25-ESP32</id><content type="html" xml:base="https://sally-00.github.io/blog/2023/2022-02-25-ESP32/"><![CDATA[<h3 id="about-pin">About pin</h3>
+<p><a href="https://qazsedcftf.blogspot.com/2019/07/esp32arduinogpio.html">pin information</a></p>
+
+<h3 id="about-ide">About IDE</h3>
+<p>You can use the arduino IDE, but the PlatformIO extension in VS Code is very convenient if you prefer using VS Code.</p>
+
+<h3 id="use-pulse-counter-for-encoder">Use pulse counter for encoder</h3>
+
+<p><a href="https://qiita.com/bleach31/items/256229d006e0b3134341">ESP32 パルスカウンタの使い方</a></p>]]></content><author><name></name></author></entry><entry><title type="html">Path managment, read files in both Windows and Mac with the same code</title><link href="https://sally-00.github.io/blog/2023/pathlib/" rel="alternate" type="text/html" title="Path managment, read files in both Windows and Mac with the same code" /><published>2023-03-16T00:00:00+00:00</published><updated>2023-03-16T00:00:00+00:00</updated><id>https://sally-00.github.io/blog/2023/pathlib</id><content type="html" xml:base="https://sally-00.github.io/blog/2023/pathlib/"><![CDATA[<p>Path in a Windows system looks like</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>my_data\\train\\
+</code></pre></div></div>
+<p>Path in a Mac system looks like</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>my_data/train/
+</code></pre></div></div>
+
+<p>I have been hard coded the path every time I want to use my code on a different system.
+A way to make things easier:</p>
+
+<h3 id="pathlib">pathlib</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="n">glob</span>
+
+<span class="c1"># Write path with forward slashes to create path, this will generate a path working in your current system
+</span><span class="n">train_folder</span> <span class="o">=</span> <span class="nc">Path</span><span class="p">(</span><span class="sh">"</span><span class="s">my_data/train</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># To combine with a file
+</span><span class="n">train_file</span> <span class="o">=</span> <span class="n">train_folder</span> <span class="o">/</span> <span class="sh">"</span><span class="s">data1.txt</span><span class="sh">"</span>
+<span class="n">f</span> <span class="o">=</span> <span class="nf">open</span><span class="p">(</span><span class="n">train_file</span><span class="p">)</span>
+
+<span class="c1"># To use glob
+</span><span class="n">files</span> <span class="o">=</span> <span class="n">glob</span><span class="p">.</span><span class="nf">glob</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">train_folder</span><span class="o">/</span><span class="sh">"</span><span class="s">*</span><span class="sh">"</span><span class="p">))</span>
+
+</code></pre></div></div>]]></content><author><name></name></author><category term="Python" /><summary type="html"><![CDATA[Path in a Windows system looks like my_data\\train\\ Path in a Mac system looks like my_data/train/]]></summary></entry><entry><title type="html">Why norm loss function comes from the assumption that data is drawn from a Gaussian distribution?</title><link href="https://sally-00.github.io/blog/2023/norm_gaussian/" rel="alternate" type="text/html" title="Why norm loss function comes from the assumption that data is drawn from a Gaussian distribution?" /><published>2023-03-12T00:00:00+00:00</published><updated>2023-03-12T00:00:00+00:00</updated><id>https://sally-00.github.io/blog/2023/norm_gaussian</id><content type="html" xml:base="https://sally-00.github.io/blog/2023/norm_gaussian/"><![CDATA[<p>I was reading the paper “A Review on Deep Learning Techniques for Video Prediction” by S. Oprea.</p>
+
+<p>In Section 2.4 The Devil is in the Loss Function, It says: “ Most of distance-based loss functions, such as based on lp norm, come from the assumption that data is drawn from a Gaussian distribution.”</p>
+
+<p>I could not understand the how. 
+Then I found <a href="https://chuanting.net/blogs/post/mmse/#:~:text=Minimizing%20L2%20loss%20comes%20from,prediction%20beyond%20mean%20square%20error.">this blog</a> that reminds me the distance minimization comes in when we are trying to fit a data distribution assuming a Gaussian distribution.
+I will put the formulas below for refreshing memory.</p>
+
+<p>With a dataset \(\Chi = \{ x^{(1)},x^{(2)},...,x^{(m)} \}\) that comes from an unknown distribution \(p_{data}(x)\), we want to model it with \(p_{model}(x;\theta)\). 
+Using max-likelihood,
+\(\theta_{ML} = p_{model}(\Chi;\theta) = \Pi^{m}_{i=1}p_{model}(x^{(i)};\theta)\)
+Using log operation for precision on computer,
+\(\theta_{ML} = \Sigma^{m}_{i=1}log p_{model}(x^{(i)};\theta)\)
+Assuming that $p_{model}(x;\theta)$ follows a Gaussian distribution $p_{model}(x;\theta) \sim \mathcal{N}(\mu,1)$,</p>
+
+\[\theta_{ML} = arg max_{\theta} \Sigma^{m}_{i=1}log p_{model}(x^{(i)};\theta) \\
+
+\theta_{ML} = arg max_{\theta} \Sigma^{m}_{i=1}log \frac{1}{\sqrt{2\pi}} exp(-(x-\theta)^2) \\
+
+\theta_{ML} = arg max_{\theta} \Sigma^{m}_{i=1}log \frac{1}{\sqrt{2\pi}} +(-(x-\theta)^2) \\
+
+\theta_{ML} = arg max_{\theta} -m log\sqrt{2\pi}-\Sigma^{m}_{i=1}(x-\theta)^2 \\
+
+\theta_{ML} = arg max_{\theta} -\Sigma^{m}_{i=1}(x-\theta)^2 \\
+
+\theta_{ML} = arg min_{\theta} \Sigma^{m}_{i=1}(x-\theta)^2 \\\]]]></content><author><name></name></author><category term="ML" /><summary type="html"><![CDATA[I was reading the paper “A Review on Deep Learning Techniques for Video Prediction” by S. Oprea.]]></summary></entry><entry><title type="html">useful ROS command memo</title><link href="https://sally-00.github.io/blog/2022/ROS_command/" rel="alternate" type="text/html" title="useful ROS command memo" /><published>2022-10-05T17:39:00+00:00</published><updated>2022-10-05T17:39:00+00:00</updated><id>https://sally-00.github.io/blog/2022/ROS_command</id><content type="html" xml:base="https://sally-00.github.io/blog/2022/ROS_command/"><![CDATA[<p>Create a package:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># catkin_create_pkg &lt;package_name&gt; [depend1] [depend2] [depend3]</span>
+<span class="nv">$ </span>catkin_create_pkg pkg_name std_msgs rospy roscpp
+</code></pre></div></div>
+<p>Package dependencies are stored in package.xml
+Navigate to the package directory:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># roscd &lt;package_name&gt;e</span>
+<span class="nv">$ </span>roscd pkg_name
+</code></pre></div></div>
+<p>Copy files from other package:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>roscp <span class="o">[</span>package_name] <span class="o">[</span>file_to_copy_path] <span class="o">[</span>copy_from_this_path]
+</code></pre></div></div>
+
+<p>Publish using command line</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>rostopic pub &lt;name of the topic&gt; &lt;<span class="nb">type </span>of the topic&gt; <span class="o">[</span>args...]
+<span class="c"># press TAB after rostopic pub &lt;name of the topic&gt; &lt;type of the topic&gt;, it auto fills the information needed</span>
+</code></pre></div></div>
+
+<p>Download publisher and subscriber examples here:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>wget https://raw.github.com/ros/ros_tutorials/kinetic-devel/rospy_tutorials/001_talker_listener/talker.py
+<span class="nv">$ </span><span class="nb">chmod</span> +x talker.py
+<span class="nv">$ </span>wget https://raw.github.com/ros/ros_tutorials/kinetic-devel/rospy_tutorials/001_talker_listener/listener.py
+<span class="nv">$ </span><span class="nb">chmod</span> +x listener.py
+</code></pre></div></div>
+<p>For the Service and Client samples in the tutorial, I got error: “ImportError: No module named beginner_tutorials.srv” when trying to run it, found <a href="https://answers.ros.org/question/114806/tutorial-116-importerror-no-module-named-beginner_tutorialssrv-with-catkin-system-build/">this link</a> helpful.</p>
+
+<p>Build the workspace:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cd ~/catkin_ws
+$ catkin_make # need to do this everytime after changing the folder structure
+
+# to build only one package
+$ catkin_make [--only-pkg-with-deps]() &lt;target_package&gt;
+</code></pre></div></div>
+
+<p>Run the program:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># rosrun &lt;package_name&gt; &lt;file_name&gt;
+$ rosrun beginner_tutorials talker.py
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># show all ros topic</span>
+<span class="nv">$ </span>rostopic list
+<span class="c"># to check specific topic</span>
+<span class="nv">$ </span>rostopic list | <span class="nb">grep</span> &lt;topic_name&gt;
+<span class="c"># show message type, subscriber, publisher</span>
+<span class="nv">$ </span>rostopic info &lt;name of the topic&gt;
+<span class="c"># to measure the frequency of the image topic</span>
+<span class="nv">$ </span>rostopic hz &lt;topic_name&gt;
+<span class="c"># show what is included in a topic</span>
+<span class="nv">$ </span>rosmsg show &lt;a topic <span class="nb">type</span><span class="o">&gt;</span>
+<span class="c"># to display an image</span>
+<span class="nv">$ </span>rqt_image_view &lt;topic_name&gt;
+
+<span class="c"># check ros launch logs (especially when there is an error), this shows the directory</span>
+<span class="nv">$ </span>roslaunch-logs
+<span class="c"># to open the directory in GUI</span>
+<span class="nv">$ </span>nautilus &lt;directory&gt;
+</code></pre></div></div>]]></content><author><name></name></author><category term="ROS" /><summary type="html"><![CDATA[project memo]]></summary></entry><entry><title type="html">useful git command memo</title><link href="https://sally-00.github.io/blog/2022/git_command/" rel="alternate" type="text/html" title="useful git command memo" /><published>2022-10-05T17:39:00+00:00</published><updated>2022-10-05T17:39:00+00:00</updated><id>https://sally-00.github.io/blog/2022/git_command</id><content type="html" xml:base="https://sally-00.github.io/blog/2022/git_command/"><![CDATA[<h2 id="cloning-a-repository">Cloning a repository</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git clone &lt;repository_name&gt;
+<span class="c"># Replace &lt;repository_name&gt; with the repo name.</span>
+</code></pre></div></div>
+<p>When pushing a cloned repo to github, <a href="https://stackoverflow.com/questions/18200248/cloning-a-repo-from-someone-elses-github-and-pushing-it-to-a-repo-on-my-github">manage upstream depends on if you want to pull changes from that repo</a>. More about origin and upstream <a href="https://stackoverflow.com/questions/9257533/what-is-the-difference-between-origin-and-upstream-on-github">here</a>.</p>
+
+<h2 id="create-a-repo">Create a repo</h2>
+<ul>
+  <li>Create a repo on the github website.</li>
+  <li>Use following code to create a new repo
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git init
+git add README.md
+git commit <span class="nt">-m</span> <span class="s2">"first commit"</span>
+git branch <span class="nt">-M</span> main
+git remote add origin git@github.com:sally-00/test2.git
+git push <span class="nt">-u</span> origin main<span class="sb">```</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="add-locally-hosted-code-to-github">Add locally hosted code to github</h2>
+<ul>
+  <li>Firstly, create a repo on the github website.</li>
+  <li>Secondly, do the following to set which repo to push to and push.
+Code should be run in the directory of the project.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git init <span class="o">&amp;&amp;</span> git symbolic-ref HEAD refs/heads/main
+<span class="nv">$ </span>git add <span class="nb">.</span>
+<span class="c"># Adds the files in the local repository and stages them for commit. To unstage a file or a folder, use 'git reset YOUR-FILE-OR-FOLDER'.</span>
+<span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s2">"First commit"</span>
+<span class="c"># Commits the tracked changes and prepares them to be pushed to a remote repository. To remove this commit and modify the file, use 'git reset --soft HEAD~1' and commit and add the file again.</span>
+<span class="nv">$ </span>git remote add origin &lt;REMOTE_URL&gt;
+<span class="c"># Sets the new remote</span>
+<span class="nv">$ </span>git remote <span class="nt">-v</span>
+<span class="c"># Verifies the new remote URL</span>
+<span class="nv">$ </span>git push origin main
+<span class="c"># Pushes the changes in your local repository up to the remote repository you specified as the origin</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="flow-of-commit-and-push-upload-to-repo">Flow of commit and push (upload) to repo</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># This is used to check what changes has been made to the directory compared to the repo.</span>
+<span class="nv">$ </span>git status
+<span class="c"># add all new changes</span>
+<span class="nv">$ </span>git add <span class="nt">--all</span>
+<span class="c"># if you need to undo the add to specific files or folder</span>
+<span class="nv">$ </span>git reset path/to/file_or_folder
+<span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s2">"Comment here"</span>
+<span class="nv">$ </span>git push
+</code></pre></div></div>
+
+<h2 id="branch-management">Branch management:</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># create a new branch</span>
+<span class="nv">$ </span>git branch &lt;branch_name&gt;
+<span class="c"># switch to an other branch</span>
+<span class="nv">$ </span>git checkout &lt;branch_name&gt;
+<span class="c"># list all branch</span>
+<span class="nv">$ </span>git branch <span class="nt">-a</span>
+</code></pre></div></div>
+
+<h2 id="switching-between-commits">Switching between commits</h2>
+
+<p>Switching between different commits, temporarily and hard delete:
+<a href="https://stackoverflow.com/questions/4114095/how-do-i-revert-a-git-repository-to-a-previous-commit">A good explanation here</a></p>
+
+<h2 id="selecting-what-files-to-be-ignored-by-git">Selecting what files to be ignored by git</h2>
+
+<p>To ignore files in the folder, create a file named “.gitignore” and put all the files’ name inside.</p>
+
+<h2 id="pulling-repo">Pulling repo</h2>
+
+<p>Pull the repo without it overwriting the changes you have made:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git stash
+<span class="nv">$ </span>git pull
+<span class="nv">$ </span>git stash pop
+</code></pre></div></div>
+<p><a href="https://stackoverflow.com/questions/19216411/how-do-i-pull-files-from-remote-without-overwriting-local-files">source</a></p>
+
+<p>Or.</p>
+
+<p>Commit changes and then pull. Use <code class="language-plaintext highlighter-rouge">--rebase</code> so it is not a merge commit and the history wil be linear.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git pull <span class="nt">--rebase</span>
+</code></pre></div></div>
+<p><a href="https://happygitwithr.com/pull-tricky.html#git-pull-with-local-commits">git pull with local commits</a></p>]]></content><author><name></name></author><category term="git" /><summary type="html"><![CDATA[Cloning a repository]]></summary></entry><entry><title type="html">useful linux command memo</title><link href="https://sally-00.github.io/blog/2022/linux_command/" rel="alternate" type="text/html" title="useful linux command memo" /><published>2022-10-05T17:39:00+00:00</published><updated>2022-10-05T17:39:00+00:00</updated><id>https://sally-00.github.io/blog/2022/linux_command</id><content type="html" xml:base="https://sally-00.github.io/blog/2022/linux_command/"><![CDATA[<p>Wget is a software package for retrieving files using HTTP, HTTPS, FTP and FTPS
+To download online files:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>wget &lt;the website&gt;
+</code></pre></div></div>
+
+<p>To permit execution of files:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">chmod</span> +x &lt;filename&gt;
+</code></pre></div></div>
+
+<p>Files Related</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># To create a file:</span>
+<span class="nv">$ </span><span class="nb">touch</span> &lt;filename&gt;
+<span class="c"># Add lines to a file:</span>
+<span class="nv">$ </span><span class="nb">echo</span> “some text” <span class="o">&gt;</span> &lt;folder/file&gt;
+<span class="c"># show content of a file:</span>
+<span class="nv">$ </span><span class="nb">cat</span> &lt;file&gt;
+</code></pre></div></div>
+
+<p>search for package</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>apt-cache search &lt;keyword&gt;
+</code></pre></div></div>
+
+<p>to open the directory in GUI</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ nautilus &lt;directory&gt;
+</code></pre></div></div>]]></content><author><name></name></author><category term="linux" /><summary type="html"><![CDATA[Wget is a software package for retrieving files using HTTP, HTTPS, FTP and FTPS To download online files: $ wget &lt;the website&gt;]]></summary></entry><entry><title type="html">collecting information from ESP32 on robots using ROS</title><link href="https://sally-00.github.io/blog/2022/ROS/" rel="alternate" type="text/html" title="collecting information from ESP32 on robots using ROS" /><published>2022-02-07T17:39:00+00:00</published><updated>2022-02-07T17:39:00+00:00</updated><id>https://sally-00.github.io/blog/2022/ROS</id><content type="html" xml:base="https://sally-00.github.io/blog/2022/ROS/"><![CDATA[<h2 id="set-up-jetson-nano-ros用">Set up Jetson Nano (ROS用)</h2>
+
+<p><a href="https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit">nividiaによるガイド</a>を順にやっていけばJetson Nanoが使えるようになります．</p>
+
+<p>元々はEthenetしか使えないけど，WiFiカードを買っているなら，熱発散する部分のねじを外して，WiFiカードを挿入すれば，WiFi使えるようになります．</p>
+
+<h2 id="install-ros">Install ROS</h2>
+
+<p>Jetson NanoのUbuntuのバージョンは18.04なので，ROSのmelodicバージョンをインストールします．（<a href="http://wiki.ros.org/melodic/Installation/Ubuntu">Wiki.ros melodic installation in ubuntu</a>）
+＊　Ubuntuのバージョンによってインストールするものが違うから，注意！
+Workspaceも同じようにmelodicので作る．基本catkin_makeでワークスペースを作る．（<a href="http://wiki.ros.org/ja/catkin/Tutorials/create_a_workspace">Wiki.ros create a workspace</a>）</p>
+
+<p>追加でやることリスト
+①自作rosパッケージのパスを追加</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cd</span> ~/
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>gedit .bashrc
+</code></pre></div></div>
+<p>最下行に<code class="language-plaintext highlighter-rouge">source ~/catkin_ws/devel/setup.bash</code>を追加後，保存．</p>
+
+<p>②rosserialのインストール</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>ros-melodic-rosserial
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>ros-melodic-rosserial-arduino
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>ros-melodic-rosserial-server
+</code></pre></div></div>
+
+<h2 id="ros-and-esp32">ROS and esp32</h2>
+<h4 id="esp32側">ESP32側</h4>
+<p>esp32側において，ROSに繋げるための設定（<a href="https://blog.csdn.net/ZhangRelay/article/details/108762844">code example</a>）</p>
+
+<h4 id="ros側">ROS側</h4>
+<p><a href="https://web.fs.uni-lj.si/lampa/rosin/ROS%20Summer%20School/Day%202/motor_control/">この記事</a>を参考に，ESP32を２台ROSにつなげられました．
+複数台でもOKです．</p>
+
+<p>ターミナル①</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>roscore
+</code></pre></div></div>
+
+<p>ターミナル②</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>rosrun rosserial_server socket_node
+</code></pre></div></div>
+
+<p>ターミナル③</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>rosrun rosserial_python message_info_service.py
+</code></pre></div></div>
+
+<h2 id="仮想マシン上にrosを入れた場合の通信">仮想マシン上にROSを入れた場合の通信</h2>
+
+<p>VMware fusionを使っているが，Network Adapterでbridged networkingを選ぶと，ネットワーク上で仮想マシンが独立してIP Addressを持つことができて，接続がうまくいく．
+<a href="https://docs.vmware.com/en/VMware-Fusion/12/com.vmware.fusion.using.doc/GUID-E498672E-19DD-40DF-92D3-FC0078947958.html">参考</a></p>]]></content><author><name></name></author><category term="ROS," /><category term="ESP32," /><category term="JetsonNano" /><summary type="html"><![CDATA[project memo]]></summary></entry><entry><title type="html">Setup this website from zero using template with Jekyll and github pages</title><link href="https://sally-00.github.io/blog/2022/githubPagesSetupMemo/" rel="alternate" type="text/html" title="Setup this website from zero using template with Jekyll and github pages" /><published>2022-02-07T17:39:00+00:00</published><updated>2022-02-07T17:39:00+00:00</updated><id>https://sally-00.github.io/blog/2022/githubPagesSetupMemo</id><content type="html" xml:base="https://sally-00.github.io/blog/2022/githubPagesSetupMemo/"><![CDATA[<h2 id="fork-the-theme-and-create-repo">Fork the theme and create repo</h2>
+<p>first <a href="https://guides.github.com/activities/forking/">fork</a> the theme from <code class="language-plaintext highlighter-rouge">github.com:alshedivat/al-folio</code> to <code class="language-plaintext highlighter-rouge">github.com:&lt;your-username&gt;/&lt;your-repo-name&gt;</code>
+Change repo name to <code class="language-plaintext highlighter-rouge">&lt;your-username&gt;.github.io</code></p>
+
+<h2 id="install-ruby-using-rbenv">Install ruby using rbenv</h2>
+
+<p>install ruby(using rbenv for managing ruby gems) and bundler
+basic information and installation of rbenv: <a href="https://github.com/rbenv/rbenv">https://github.com/rbenv/rbenv</a></p>
+
+<p>I installed using brew:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>brew <span class="nb">install </span>rbenv
+<span class="nv">$ </span>brew upgrade rbenv ruby-build
+</code></pre></div></div>
+<p>Set up rbenv in the shell and verify the setup of rbenv using the following commands.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>rbenv init
+<span class="nv">$ </span>curl <span class="nt">-fsSL</span> https://github.com/rbenv/rbenv-installer/raw/main/bin/rbenv-doctor | bash
+</code></pre></div></div>
+<p>But got error saying: Checking for rbenv shims in PATH: not found</p>
+
+<p>Tried adding ‘eval “$(rbenv init -)”’ to ~/.bash_profile:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">source</span> ~/.bash_profile
+<span class="nv">$ </span><span class="nb">echo</span> <span class="s1">'eval "$(rbenv init -)"'</span> <span class="o">&gt;&gt;</span> ~/.bash_profile
+</code></pre></div></div>
+<p>Did not work… Realized that I’m using zsh, not bash!!!
+Add the following lines to /Users/<username>/.zshrc</username></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eval "$(rbenv init -)"
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
+</code></pre></div></div>
+<p>checked again with:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">-fsSL</span> https://github.com/rbenv/rbenv-installer/raw/main/bin/rbenv-doctor | bash<span class="sb">`</span> 
+</code></pre></div></div>
+<p>All working fine now!</p>
+
+<p>Install the latest stable version of Ruby using rbenv:
+(参考：<a href="https://qiita.com/hujuu/items/3d600f2b2384c145ad12">Qitta: rbenvでrubyのバージョンを管理する</a>)</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>rbenv <span class="nb">install </span>3.1.0
+</code></pre></div></div>
+<p>Got error… error including the following:
+BUILD FAILED (macOS 12.1 using ruby-build 20220125) In file included from compile.c:40: ./vm_callinfo.h:216:16: error: use of undeclared identifier ‘RUBY_FUNCTION_NAME_STRING’     if (debug) rp(ci);</p>
+
+<p>Tried the following:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ RUBY_CFLAGS</span><span class="o">=</span><span class="nt">-DUSE_FFI_CLOSURE_ALLOC</span> rbenv <span class="nb">install </span>3.1.0
+</code></pre></div></div>
+<p>Did not work for me…
+Some are saying about updating the command line tools. So:
+（わからんけど，一応コマンドラインツールを再インストールしてみる．<a href="https://qiita.com/marusho_summers/items/1022d5bbfd2f7856d2f8">Qiita: rbenvでrubyをインストールできなかったのでメモ</a>）</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo rm</span> <span class="nt">-rf</span> /Library/Developer/CommandLineTools
+<span class="nv">$ </span>xcode-select <span class="nt">--install</span>
+</code></pre></div></div>
+
+<p>Did <code class="language-plaintext highlighter-rouge">$ rbenv install 3.1.0</code> again and it worked!!
+Check the version:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>which ruby
+</code></pre></div></div>
+<p>If it shows the system’s ruby version, we need to switch the version.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>rbenv global 3.1.0
+</code></pre></div></div>
+<p>Now install ruby bundler.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gem <span class="nb">install </span>bundler
+</code></pre></div></div>
+
+<p>Couldn’t do that because not permitted. When checking the version again, the path is still on the system side. The switch of the version was not successful!?</p>
+
+<p>To set ruby path to rbenv, add the following to shell setting file(.bashrc or .zshrc)．
+(<a href="https://qiita.com/nishina555/items/63ebd4a508a09c481150">Qiita: gem installでpermissionエラーになった時の対応方法</a>)</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[[</span> <span class="nt">-d</span> ~/.rbenv  <span class="o">]]</span> <span class="o">&amp;&amp;</span> <span class="se">\</span>
+  <span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/.rbenv/bin:<span class="k">${</span><span class="nv">PATH</span><span class="k">}</span> <span class="o">&amp;&amp;</span> <span class="se">\</span>
+  <span class="nb">eval</span> <span class="s2">"</span><span class="si">$(</span>rbenv init -<span class="si">)</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<p>check version using <code class="language-plaintext highlighter-rouge">which ruby</code> and <code class="language-plaintext highlighter-rouge">which gem</code> to make sure the path is on the rbenv side. Do installation again:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gem <span class="nb">install </span>bundler
+</code></pre></div></div>
+<p>Working now!!</p>
+
+<h2 id="back-to-setting-up-the-theme">Back to setting up the theme</h2>
+
+<p>Use the following to clone repo to local and execute to see the website</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git clone git@github.com:&lt;username&gt;/&lt;username.github.io&gt;.git
+<span class="nv">$ </span><span class="nb">cd</span> &lt;username.github.io&gt;
+<span class="nv">$ </span>bundle <span class="nb">install</span>
+<span class="nv">$ </span>bundle <span class="nb">exec </span>jekyll serve
+</code></pre></div></div>
+<p>After <code class="language-plaintext highlighter-rouge">$ bundle exec jekyll serve</code>, we can access the website through <code class="language-plaintext highlighter-rouge">http://127.0.0.1:4000</code>. Edits you made to the contents will be applied to it in real-time.</p>
+
+<p>Edit the contents of the website and push to git. Then deployment will be triggered automatically. You should be able to access the website through <code class="language-plaintext highlighter-rouge">https://&lt;username&gt;.github.io</code> in a few minutes after the whole process is done.</p>
+
+<p>Make sure you did the following to ensure proper deployment:</p>
+<ul>
+  <li>In git repo setting, pages, set source branch to gh-pages (not master).</li>
+  <li>In the file <code class="language-plaintext highlighter-rouge">_config.yml</code>, set <code class="language-plaintext highlighter-rouge">url</code> to <code class="language-plaintext highlighter-rouge">https://&lt;your-github-username&gt;.github.io</code> and <code class="language-plaintext highlighter-rouge">baseurl</code> to <code class="language-plaintext highlighter-rouge">/&lt;your-repository-name&gt;/</code></li>
+</ul>
+
+<p>↑ If you don’t do this properly, the website will display well in the local but wired on the online website.
+これちゃんとできなかったら，ローカルではちゃんと表示されるけど，ウェブサイトでは変になる．</p>
+
+<p>I had the problem of pictures not being displayed in <code class="language-plaintext highlighter-rouge">http://127.0.0.1:4000</code>, but no problem on the <code class="language-plaintext highlighter-rouge">https://&lt;username&gt;.github.io</code>. It turned out that imagemagick was not installed. Used brew to install and then the pictures were generated with no problem:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>brew <span class="nb">install </span>imagemagick
+</code></pre></div></div>
+
+<h2 id="folder-structure">Folder structure</h2>
+<p>Read: <a href="https://jekyllrb.com/docs/structure/">https://jekyllrb.com/docs/structure/</a></p>
+
+<p>Contents related file and folders:</p>
+
+<p><code class="language-plaintext highlighter-rouge">_config.yaml</code>: stores configuration data.</p>
+
+<p><code class="language-plaintext highlighter-rouge">_posts</code> : posts of the blog. Naming of the files must follow <code class="language-plaintext highlighter-rouge">Year-Month-Day-title.md</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">_pages</code> : manage what pages are appearing (about, blog, projects, publications, teaching)</p>
+
+<p><code class="language-plaintext highlighter-rouge">_news</code> : put news/announcements here</p>
+
+<p><code class="language-plaintext highlighter-rouge">_posts</code> : put posts for blog here</p>
+
+<p><code class="language-plaintext highlighter-rouge">_projects</code> : put projects here</p>
+
+<p>Others:</p>
+
+<p><code class="language-plaintext highlighter-rouge">_site</code>: generated site is placed here</p>
+
+<h2 id="finding-website-through-google-search">Finding website through Google search</h2>
+<p>I could not reach my website through searching my name and some keywords…
+Turned out the reason was that Google has not indexed my website yet which is common with brand new websites.
+You can check by searching <code class="language-plaintext highlighter-rouge">site:&lt;your_site_address&gt;</code></p>]]></content><author><name></name></author><category term="website," /><category term="Jekyll," /><category term="GithubPages" /><summary type="html"><![CDATA[website memo]]></summary></entry><entry><title type="html">install and set up git</title><link href="https://sally-00.github.io/blog/2021/git/" rel="alternate" type="text/html" title="install and set up git" /><published>2021-04-01T17:39:00+00:00</published><updated>2021-04-01T17:39:00+00:00</updated><id>https://sally-00.github.io/blog/2021/git</id><content type="html" xml:base="https://sally-00.github.io/blog/2021/git/"><![CDATA[<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt-get update
+<span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install </span>git
+
+<span class="c"># to check if it is correctly installed</span>
+<span class="nv">$ </span>git <span class="nt">--version</span>
+
+<span class="c"># to set the account's default identity</span>
+<span class="nv">$ </span>git config <span class="nt">--global</span> user.email <span class="s2">"you@example.com"</span>
+<span class="nv">$ </span>git config <span class="nt">--global</span> user.name <span class="s2">"Your Name"</span>
+</code></pre></div></div>
+
+<p>Generate ssh key following <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">here</a>. Adding locally hosted code to GitHub following <a href="https://docs.github.com/en/get-started/importing-your-projects-to-github/importing-source-code-to-github/adding-locally-hosted-code-to-github">here</a>.</p>
+
+<p>To summarize, basically do the following</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ssh-keygen -t ed25519 -C "your_email@example.com"
+# start the ssh-agent in the background
+$ eval "$(ssh-agent -s)"
+# &lt;key_path&gt; is something like ~/.ssh/id_ed25519
+$ ssh-add &lt;key_path&gt;
+# show the public key
+$ cat ~/.ssh/id_ed25519.pub
+</code></pre></div></div>
+<p>Copy the shown public key and add it to SSH keys in your github account.</p>
+
+<p>Git cheat sheet: <a href="https://education.github.com/git-cheat-sheet-education.pdf">here</a>.</p>]]></content><author><name></name></author><category term="git" /><summary type="html"><![CDATA[install and set up git]]></summary></entry></feed>

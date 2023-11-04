@@ -2,7 +2,7 @@
 <html lang="en">
 
   <!-- Head -->
-  <head><meta http-equiv="refresh" content="3; url=https://sally-00.github.io/" />        
+  <head>        
     <!-- Metadata, OpenGraph and Schema.org -->
     
 
@@ -10,9 +10,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Yi  Zhang | Page not found</title>
+    <title>Yi  Zhang | useful git command memo</title>
     <meta name="author" content="Yi  Zhang" />
-    <meta name="description" content="Looks like there has been a mistake. Nothing exists here." />
+    <meta name="description" content="A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
+" />
     <meta name="keywords" content="yi-zhang, osaka-university, berkeley" />
 
 
@@ -31,7 +32,7 @@
     <!-- Styles -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
     <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="canonical" href="https://sally-00.github.io/404.html">
+    <link rel="canonical" href="https://sally-00.github.io/blog/2022/git_command/">
 
     <!-- Dark Mode -->
     <script src="/assets/js/theme.js"></script>
@@ -65,7 +66,7 @@
               </li>
               
               <!-- Blog -->
-              <li class="nav-item ">
+              <li class="nav-item active">
                 <a class="nav-link" href="/blog/">blog</a>
               </li>
 
@@ -95,20 +96,115 @@
 
     <!-- Content -->
     <div class="container mt-5">
-      <!-- page.html -->
-        <div class="post">
+      <!-- _layouts/post.html -->
 
-          <header class="post-header">
-            <h1 class="post-title">Page not found</h1>
-            <p class="post-description">Looks like there has been a mistake. Nothing exists here.</p>
-          </header>
+<div class="post">
 
-          <article>
-            <p>You will be redirected to the main page within 3 seconds. If not redirected, please click <a href="https://sally-00.github.io/">here</a>.</p>
+  <header class="post-header">
+    <h1 class="post-title">useful git command memo</h1>
+    <p class="post-meta">October 5, 2022</p>
+    <p class="post-tags">
+      <a href="/blog/2022"> <i class="fas fa-calendar fa-sm"></i> 2022 </a>
+        ·  
+        <a href="/blog/tag/git">
+          <i class="fas fa-hashtag fa-sm"></i> git</a>  
+          
 
-          </article>
+    </p>
+  </header>
 
-        </div>
+  <article class="post-content">
+    <h2 id="cloning-a-repository">Cloning a repository</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git clone &lt;repository_name&gt;
+<span class="c"># Replace &lt;repository_name&gt; with the repo name.</span>
+</code></pre></div></div>
+<p>When pushing a cloned repo to github, <a href="https://stackoverflow.com/questions/18200248/cloning-a-repo-from-someone-elses-github-and-pushing-it-to-a-repo-on-my-github" target="_blank" rel="noopener noreferrer">manage upstream depends on if you want to pull changes from that repo</a>. More about origin and upstream <a href="https://stackoverflow.com/questions/9257533/what-is-the-difference-between-origin-and-upstream-on-github" target="_blank" rel="noopener noreferrer">here</a>.</p>
+
+<h2 id="create-a-repo">Create a repo</h2>
+<ul>
+  <li>Create a repo on the github website.</li>
+  <li>Use following code to create a new repo
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>git init
+git add README.md
+git commit <span class="nt">-m</span> <span class="s2">"first commit"</span>
+git branch <span class="nt">-M</span> main
+git remote add origin git@github.com:sally-00/test2.git
+git push <span class="nt">-u</span> origin main<span class="sb">```</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="add-locally-hosted-code-to-github">Add locally hosted code to github</h2>
+<ul>
+  <li>Firstly, create a repo on the github website.</li>
+  <li>Secondly, do the following to set which repo to push to and push.
+Code should be run in the directory of the project.
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git init <span class="o">&amp;&amp;</span> git symbolic-ref HEAD refs/heads/main
+<span class="nv">$ </span>git add <span class="nb">.</span>
+<span class="c"># Adds the files in the local repository and stages them for commit. To unstage a file or a folder, use 'git reset YOUR-FILE-OR-FOLDER'.</span>
+<span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s2">"First commit"</span>
+<span class="c"># Commits the tracked changes and prepares them to be pushed to a remote repository. To remove this commit and modify the file, use 'git reset --soft HEAD~1' and commit and add the file again.</span>
+<span class="nv">$ </span>git remote add origin &lt;REMOTE_URL&gt;
+<span class="c"># Sets the new remote</span>
+<span class="nv">$ </span>git remote <span class="nt">-v</span>
+<span class="c"># Verifies the new remote URL</span>
+<span class="nv">$ </span>git push origin main
+<span class="c"># Pushes the changes in your local repository up to the remote repository you specified as the origin</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="flow-of-commit-and-push-upload-to-repo">Flow of commit and push (upload) to repo</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># This is used to check what changes has been made to the directory compared to the repo.</span>
+<span class="nv">$ </span>git status
+<span class="c"># add all new changes</span>
+<span class="nv">$ </span>git add <span class="nt">--all</span>
+<span class="c"># if you need to undo the add to specific files or folder</span>
+<span class="nv">$ </span>git reset path/to/file_or_folder
+<span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s2">"Comment here"</span>
+<span class="nv">$ </span>git push
+</code></pre></div></div>
+
+<h2 id="branch-management">Branch management:</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># create a new branch</span>
+<span class="nv">$ </span>git branch &lt;branch_name&gt;
+<span class="c"># switch to an other branch</span>
+<span class="nv">$ </span>git checkout &lt;branch_name&gt;
+<span class="c"># list all branch</span>
+<span class="nv">$ </span>git branch <span class="nt">-a</span>
+</code></pre></div></div>
+
+<h2 id="switching-between-commits">Switching between commits</h2>
+
+<p>Switching between different commits, temporarily and hard delete:
+<a href="https://stackoverflow.com/questions/4114095/how-do-i-revert-a-git-repository-to-a-previous-commit" target="_blank" rel="noopener noreferrer">A good explanation here</a></p>
+
+<h2 id="selecting-what-files-to-be-ignored-by-git">Selecting what files to be ignored by git</h2>
+
+<p>To ignore files in the folder, create a file named “.gitignore” and put all the files’ name inside.</p>
+
+<h2 id="pulling-repo">Pulling repo</h2>
+
+<p>Pull the repo without it overwriting the changes you have made:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git stash
+<span class="nv">$ </span>git pull
+<span class="nv">$ </span>git stash pop
+</code></pre></div></div>
+<p><a href="https://stackoverflow.com/questions/19216411/how-do-i-pull-files-from-remote-without-overwriting-local-files" target="_blank" rel="noopener noreferrer">source</a></p>
+
+<p>Or.</p>
+
+<p>Commit changes and then pull. Use <code class="language-plaintext highlighter-rouge">--rebase</code> so it is not a merge commit and the history wil be linear.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git pull <span class="nt">--rebase</span>
+</code></pre></div></div>
+<p><a href="https://happygitwithr.com/pull-tricky.html#git-pull-with-local-commits" target="_blank" rel="noopener noreferrer">git pull with local commits</a></p>
+
+  </article>
+
+</div>
 
     </div>
 

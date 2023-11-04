@@ -10,10 +10,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Yi  Zhang | blog</title>
+    <title>Yi  Zhang | useful ROS command memo</title>
     <meta name="author" content="Yi  Zhang" />
-    <meta name="description" content="A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
-" />
+    <meta name="description" content="project memo" />
     <meta name="keywords" content="yi-zhang, osaka-university, berkeley" />
 
 
@@ -32,7 +31,7 @@
     <!-- Styles -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
     <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="canonical" href="https://sally-00.github.io/blog/">
+    <link rel="canonical" href="https://sally-00.github.io/blog/2022/ROS_command/">
 
     <!-- Dark Mode -->
     <script src="/assets/js/theme.js"></script>
@@ -67,7 +66,7 @@
               
               <!-- Blog -->
               <li class="nav-item active">
-                <a class="nav-link" href="/blog/">blog<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/blog/">blog</a>
               </li>
 
               <!-- Other pages -->
@@ -82,8 +81,8 @@
               </li>
 
               <!-- Toogle theme mode -->
-              <div class = "toggle-container">
-                <a id = "light-toggle">
+              <div class="toggle-container">
+                <a id="light-toggle">
                   <i class="fas fa-moon"></i>
                   <i class="fas fa-sun"></i>
                 </a>
@@ -96,114 +95,83 @@
 
     <!-- Content -->
     <div class="container mt-5">
-      <div class="post">
+      <!-- _layouts/post.html -->
 
-  <div class="header-bar">
-    <h1>maybe useful memo</h1>
-    <h2>some installation and study notes</h2>
-  </div>
+<div class="post">
 
-
-  <ul class="post-list">
-    
-
-    
-    
-    
-    
-
-    <li>
-      <h3><a class="post-title" href="/blog/2023/2022-02-25-ESP32/"></a>
-      </h3>
-      <p></p>
-      <p class="post-meta"> 1 min read &nbsp; &middot; &nbsp;
-        November 4, 2023
-      </p>
-      <p class="post-tags">
-        <a href="/blog/2023">
-          <i class="fas fa-calendar fa-sm"></i> 2023 </a>
-
+  <header class="post-header">
+    <h1 class="post-title">useful ROS command memo</h1>
+    <p class="post-meta">October 5, 2022</p>
+    <p class="post-tags">
+      <a href="/blog/2022"> <i class="fas fa-calendar fa-sm"></i> 2022 </a>
+        ·  
+        <a href="/blog/tag/ROS">
+          <i class="fas fa-hashtag fa-sm"></i> ROS</a>  
           
 
-          
     </p>
-    </li>
+  </header>
 
-    
+  <article class="post-content">
+    <p>Create a package:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># catkin_create_pkg &lt;package_name&gt; [depend1] [depend2] [depend3]</span>
+<span class="nv">$ </span>catkin_create_pkg pkg_name std_msgs rospy roscpp
+</code></pre></div></div>
+<p>Package dependencies are stored in package.xml
+Navigate to the package directory:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># roscd &lt;package_name&gt;e</span>
+<span class="nv">$ </span>roscd pkg_name
+</code></pre></div></div>
+<p>Copy files from other package:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>roscp <span class="o">[</span>package_name] <span class="o">[</span>file_to_copy_path] <span class="o">[</span>copy_from_this_path]
+</code></pre></div></div>
 
-    
-    
-    
-    
+<p>Publish using command line</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>rostopic pub &lt;name of the topic&gt; &lt;<span class="nb">type </span>of the topic&gt; <span class="o">[</span>args...]
+<span class="c"># press TAB after rostopic pub &lt;name of the topic&gt; &lt;type of the topic&gt;, it auto fills the information needed</span>
+</code></pre></div></div>
 
-    <li>
-      <h3><a class="post-title" href="/blog/2023/pathlib/">Path managment, read files in both Windows and Mac with the same code</a>
-      </h3>
-      <p></p>
-      <p class="post-meta"> 1 min read &nbsp; &middot; &nbsp;
-        March 16, 2023
-      </p>
-      <p class="post-tags">
-        <a href="/blog/2023">
-          <i class="fas fa-calendar fa-sm"></i> 2023 </a>
+<p>Download publisher and subscriber examples here:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>wget https://raw.github.com/ros/ros_tutorials/kinetic-devel/rospy_tutorials/001_talker_listener/talker.py
+<span class="nv">$ </span><span class="nb">chmod</span> +x talker.py
+<span class="nv">$ </span>wget https://raw.github.com/ros/ros_tutorials/kinetic-devel/rospy_tutorials/001_talker_listener/listener.py
+<span class="nv">$ </span><span class="nb">chmod</span> +x listener.py
+</code></pre></div></div>
+<p>For the Service and Client samples in the tutorial, I got error: “ImportError: No module named beginner_tutorials.srv” when trying to run it, found <a href="https://answers.ros.org/question/114806/tutorial-116-importerror-no-module-named-beginner_tutorialssrv-with-catkin-system-build/" target="_blank" rel="noopener noreferrer">this link</a> helpful.</p>
 
-          
-          &nbsp; &middot; &nbsp;
-            
-            <a href="/blog/tag/Python">
-              <i class="fas fa-hashtag fa-sm"></i> Python</a> &nbsp;
-              
-          
+<p>Build the workspace:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cd ~/catkin_ws
+$ catkin_make # need to do this everytime after changing the folder structure
 
-          
-    </p>
-    </li>
+# to build only one package
+$ catkin_make [--only-pkg-with-deps]() &lt;target_package&gt;
+</code></pre></div></div>
 
-    
+<p>Run the program:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># rosrun &lt;package_name&gt; &lt;file_name&gt;
+$ rosrun beginner_tutorials talker.py
+</code></pre></div></div>
 
-    
-    
-    
-    
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># show all ros topic</span>
+<span class="nv">$ </span>rostopic list
+<span class="c"># to check specific topic</span>
+<span class="nv">$ </span>rostopic list | <span class="nb">grep</span> &lt;topic_name&gt;
+<span class="c"># show message type, subscriber, publisher</span>
+<span class="nv">$ </span>rostopic info &lt;name of the topic&gt;
+<span class="c"># to measure the frequency of the image topic</span>
+<span class="nv">$ </span>rostopic hz &lt;topic_name&gt;
+<span class="c"># show what is included in a topic</span>
+<span class="nv">$ </span>rosmsg show &lt;a topic <span class="nb">type</span><span class="o">&gt;</span>
+<span class="c"># to display an image</span>
+<span class="nv">$ </span>rqt_image_view &lt;topic_name&gt;
 
-    <li>
-      <h3><a class="post-title" href="/blog/2023/norm_gaussian/">Why norm loss function comes from the assumption that data is drawn from a Gaussian distribution?</a>
-      </h3>
-      <p></p>
-      <p class="post-meta"> 2 min read &nbsp; &middot; &nbsp;
-        March 12, 2023
-      </p>
-      <p class="post-tags">
-        <a href="/blog/2023">
-          <i class="fas fa-calendar fa-sm"></i> 2023 </a>
+<span class="c"># check ros launch logs (especially when there is an error), this shows the directory</span>
+<span class="nv">$ </span>roslaunch-logs
+<span class="c"># to open the directory in GUI</span>
+<span class="nv">$ </span>nautilus &lt;directory&gt;
+</code></pre></div></div>
 
-          
-          &nbsp; &middot; &nbsp;
-            
-            <a href="/blog/tag/ML">
-              <i class="fas fa-hashtag fa-sm"></i> ML</a> &nbsp;
-              
-          
-
-          
-    </p>
-    </li>
-
-    
-  </ul>
-
-  <nav aria-label="Blog page naviation">
-  <ul class="pagination pagination-lg justify-content-center">
-    <li class="page-item disabled">
-      <a class="page-link" href="" tabindex="-1" aria-disabled="">Newer</a>
-    </li><li class="page-item active"><a class="page-link" href="/blog/index.html" title="blog">1</a></li>
-      <li class="page-item "><a class="page-link" href="/blog/page/2/index.html" title="blog - page 2">2</a></li>
-      <li class="page-item "><a class="page-link" href="/blog/page/3/index.html" title="blog - page 3">3</a></li>
-      <li class="page-item ">
-      <a class="page-link" href="/blog/page/2/">Older</a>
-    </li>
-  </ul>
-</nav>
+  </article>
 
 </div>
 
@@ -212,7 +180,7 @@
     <!-- Footer -->    
     <footer class="fixed-bottom">
       <div class="container mt-0">
-        &copy; Copyright 2023 Yi  Zhang. Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>. Photos from <a href="https://unsplash.com" target="_blank">Unsplash</a>.
+        © Copyright 2023 Yi  Zhang. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="noopener noreferrer">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" target="_blank" rel="noopener noreferrer">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub Pages</a>. Photos from <a href="https://unsplash.com" target="_blank" rel="noopener noreferrer">Unsplash</a>.
 
       </div>
     </footer>

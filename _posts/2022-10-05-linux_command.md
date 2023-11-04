@@ -32,6 +32,10 @@ search for package
 $ apt-cache search <keyword>
 ```
 
+to open the directory in GUI
+```
+$ nautilus <directory>
+```
 
 
 

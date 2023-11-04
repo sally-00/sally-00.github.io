@@ -66,4 +66,9 @@ $ rostopic hz <topic_name>
 $ rosmsg show <a topic type>
 # to display an image
 $ rqt_image_view <topic_name>
+
+# check ros launch logs (especially when there is an error), this shows the directory
+$ roslaunch-logs
+# to open the directory in GUI
+$ nautilus <directory>
 ```

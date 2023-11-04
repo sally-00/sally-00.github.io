@@ -14,7 +14,7 @@ I could not understand the how.
 Then I found [this blog](https://chuanting.net/blogs/post/mmse/#:~:text=Minimizing%20L2%20loss%20comes%20from,prediction%20beyond%20mean%20square%20error.) that reminds me the distance minimization comes in when we are trying to fit a data distribution assuming a Gaussian distribution.
 I will put the formulas below for refreshing memory.
 
-With a dataset $\Chi = \{ x^{(1)},x^{(2)},...,x^{(m)} \}$  that comes from an unknown distribution $p_{data}(x)$, we want to model it with $p_{model}(x;\theta)$. 
+With a dataset $$\Chi = \{ x^{(1)},x^{(2)},...,x^{(m)} \}$$ that comes from an unknown distribution $$p_{data}(x)$$, we want to model it with $$p_{model}(x;\theta)$$. 
 Using max-likelihood,
 $$
 \theta_{ML} = p_{model}(\Chi;\theta) = \Pi^{m}_{i=1}p_{model}(x^{(i)};\theta)

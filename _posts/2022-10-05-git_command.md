@@ -23,13 +23,16 @@ git init
 git add README.md
 git commit -m "first commit"
 git branch -M main
+# create new branch called "main"
 git remote add origin git@github.com:sally-00/test2.git
-git push -u origin main```
+# origin is the shortname for remote repository
+git push -u origin main
+# push the new branch to git
 ```
 
 ## Add locally hosted code to github
 - Firstly, create a repo on the github website. 
-- Secondly, do the following to set which repo to push to and push.
+- Secondly, do the following to set which remote repo to push to, and finally push.
 Code should be run in the directory of the project.
 ``` bash
 $ git init && git symbolic-ref HEAD refs/heads/main
@@ -95,3 +98,29 @@ Commit changes and then pull. Use `--rebase` so it is not a merge commit and the
 $ git pull --rebase
 ```
 [git pull with local commits](https://happygitwithr.com/pull-tricky.html#git-pull-with-local-commits)
+
+
+## Changing repo name or remote url
+
+Setting origin to new url after changing the repo name. 
+
+``` bash
+$ git remote -v
+# Verifies the remote URL
+$ git remote set-url origin NEW_URL
+# set new push location
+```
+
+## migrate current repository to a new repository
+
+When I had to push the repo to another repository
+
+``` bash
+git remote remove origin
+git remote add origin NEW_URL
+git branch -M main
+git push -u origin main
+```
+
+origin means the URL of the remote repository you are pushing to.
+`add origin` is adding a new remote url. `set-url origin` is changing the url of an existing remote repository. 

@@ -25,3 +25,100 @@
 	title = {A Decentralized Approach to Cooperative Object Transportation with Robots Equipped with Flexible Tactile Sensors},
 	year = {2021}}
 
+@inproceedings{dars2022,
+	abbr = {DARS2022},
+	author = {Yi Zhang and Yuichiro Sueoka and Hisashi Ishihara and Takumi Kawasetsu and Koichi Osuka},
+	title = {A Decentralized Approach to Cooperative Object Transportation with Robots Equipped with Flexible Tactile Sensors},
+	booktitle = {16th International Symposium on Distributed Autonomous Robotic Systems},
+	year = {2022},
+	html = {https://link.springer.com/chapter/10.1007/978-3-031-51497-5_8},
+	abstract = {Cooperative transportation of objects by a group of small mobile robots is expected to work in disaster sites. In this study, we aim to transport fragile objects including humans which may move during the transport, with as little burden as possible. We propose the adoption of a flexible tri-axis tactile sensor with thickness at the top of the robot on which the object is mounted for safe support and state monitoring. We improved the leader-follower based control by adding force feedback into the leader’s control law to prevent excessive force on the object, which is the disadvantage of the typical leader-follower method. We verified the robots can transport a rigid body gently with the proposed control law by converging their speeds to the same value in a dynamical simulation and actual experiments. Additionally, we found that multijoint objects also can be transported with the proposed method, whereas the stable support of the object by each robot is reserved for future works.}}
+
+@inproceedings{iros2024,
+	abbr = {IROS2024},
+	author = {Yi Zhang and Daniel Larby and Fumiya Iida and Fulvio Forni},
+	title = {Virtual Model Control for Compliant Reaching under Uncertainties},
+	booktitle = {IEEE/RSJ International Conference on Intelligent Robots and Systems},
+	year = {2024},
+	html = {https://ieeexplore.ieee.org/document/10801592},
+	abstract = {Virtual Model Control (VMC) is an approach to design a controller for force-controlled robots in complex uncertain environments. While this method was primarily investigated for legged robot locomotion in the past, it can be more generally applicable to other types of robotic systems. This paper investigates the VMC framework for reaching tasks in a force-controlled robotic arm. We propose six different approaches to designing virtual models in order to achieve reaching tasks in environments with obstacles and uncertainties. A force-controlled 8 degree-of-freedom humanoid robot was used to validate the proposed approach in the real world. We conducted three experiments to test the performance of VMC controllers in terms of predictability, sensitivity to external force, and adaptability against known and unknown obstacles. Experimental analyses show that, even though the proposed approach needs to sacrifice accuracy and trajectory optimality, it enables us to design complex reaching motions under uncertainties, in an intuitive and extendable manner.}}
+
+@article{wang2025ejc,
+	abbr = {EJC2025},
+	author = {Zixing Wang and Yi Zhang and Fulvio Forni},
+	title = {Dissipative iFIR filters for data-driven design},
+	journal = {European Journal of Control},
+	volume = {86},
+	year = {2025},
+	html = {https://www.sciencedirect.com/science/article/pii/S0947358025001293},
+	abstract = {We tackle the problem of providing closed-loop stability guarantees with a scalable data-driven design. We combine virtual reference feedback tuning with dissipativity constraints on the controller for closed-loop
+stability. The constraints are formulated as a set of linear inequalities in the frequency domain. This leads to a
+convex problem that is scalable with respect to the length of the data and the complexity of the controller. An
+extension of virtual reference feedback tuning to include disturbance dynamics is also discussed. The proposed
+data-driven control design is illustrated by a soft gripper impedance control example.}}
+
+@article{cutting2025,
+	abbr = {under review},
+	author = {Yi Zhang and Fumiya Iida and Fulvio Forni},
+	title = {Periodic robust robotic rock chop via virtual model control},
+	journal = {Under review for IJRR},
+	year = {2025},
+	arxiv = {2508.02604},
+	html = {https://arxiv.org/abs/2508.02604},
+	abstract = {Robotic cutting is a challenging contact-rich manipulation task where the robot must simultaneously negotiate unknown
+object mechanics, large contact forces, and precise motion requirements. We introduce a new active virtual-model
+control scheme that enables knife rocking motion for robot manipulators, without pre-planned trajectories or precise
+information of the environment. Motion is generated and controlled through switching virtual coupling with virtual
+mechanisms, given by virtual springs, dampers, and masses arranged in a suitable way. Through analysis and
+experiments, we demonstrate that the controlled robot behavior settles into a periodic motion. Experiments with a
+Franka manipulator demonstrate robust cuts with five different vegetables, and sub-millimeter slice accuracy from 1
+mm to 6 mm at nearly one cut per second. The same controller survives changes in knife shape and cutting board
+height, and adaptation to a different humanoid manipulator, demonstrating robustness and platform independence.}}
+
+@inproceedings{icra2026,
+	abbr = {ICRA2026},
+	author = {Yi Zhang and Omar Faris and Chapa Sirithunge and Kai-Fung Chu and Fumiya Iida and Fulvio Forni},
+	title = {Distributed Virtual Model Control for Scalable Human-Robot Interaction in Shared Workspace},
+	booktitle = {IEEE International Conference on Robotics and Automation},
+	year = {2026},
+	arxiv = {2602.17415},
+	html = {https://arxiv.org/abs/2602.17415},
+	abstract = {We present a decentralized, agent agnostic, and
+safety-aware control framework for human–robot collaboration
+based on Virtual Model Control (VMC). In our approach,
+both humans and robots are embedded in the same virtualcomponent-shaped workspace, where motion is the result of
+the interaction with virtual springs and dampers rather than
+explicit trajectory planning. A decentralized, force-based stall
+detector identifies deadlocks, which are resolved through negotiation. This reduces the probability of robots getting stuck
+in the block placement task from up to 61.2% to zero in our
+experiments. The framework scales without structural changes
+thanks to the distributed implementation: in experiments we
+demonstrate safe collaboration with up to two robots and two
+humans, and in simulation up to four robots, maintaining
+inter-agent separation at around 20 cm. Results show that the
+method shapes robot behavior intuitively by adjusting control
+parameters and achieves deadlock-free operation across team
+sizes in all tested scenarios.}}
+
+@article{ifir2026,
+	abbr = {under review},
+	author = {Yi Zhang and Zixing Wang and Fulvio Forni},
+	title = {Passive iFIR filters for data-driven velocity control in robotics},
+	journal = {Under review for RA-L},
+	year = {2026},
+	html = {https://arxiv.org/abs/2603.29882},
+	abstract = {We present a passive, data-driven velocity control
+method for nonlinear robotic manipulators that achieves better
+tracking performance than optimized PID with comparable
+design complexity. Using only three minutes of probing data,
+a VRFT-based design identifies passive iFIR controllers that
+(i) preserve closed-loop stability via passivity constraints and
+(ii) outperform a VRFT-tuned PID baseline on the Franka
+Research 3 robot in both joint-space and Cartesian-space
+velocity control, achieving up to a 74.5% reduction in tracking
+error for the Cartesian velocity tracking experiment with
+the most demanding reference model. When the robot endeffector dynamics change, the controller can be re-learned from
+new data, regaining nominal performance. This study bridges
+learning-based control and stability-guaranteed design: passive
+iFIR learns from data while retaining passivity-based stability
+guarantees, unlike many learning-based approaches.}}

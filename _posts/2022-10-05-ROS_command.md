@@ -6,6 +6,8 @@ description: project memo
 tags: ROS
 ---
 
+## Create packages
+
 Create a package:
 ```bash
 # catkin_create_pkg <package_name> [depend1] [depend2] [depend3]
@@ -14,7 +16,7 @@ $ catkin_create_pkg pkg_name std_msgs rospy roscpp
 Package dependencies are stored in package.xml
 Navigate to the package directory:
 ``` bash
-# roscd <package_name>e
+# roscd <package_name>
 $ roscd pkg_name
 ```
 Copy files from other package:
@@ -22,13 +24,15 @@ Copy files from other package:
 $ roscp [package_name] [file_to_copy_path] [copy_from_this_path]
 ```
 
+## Publishing and subscribing
+
 Publish using command line
 ```bash
 $ rostopic pub <name of the topic> <type of the topic> [args...]
 # press TAB after rostopic pub <name of the topic> <type of the topic>, it auto fills the information needed
 ```
 
-Download publisher and subscriber examples here:
+Publisher, subscriber and other examples in python are available. Download as follows:
 ``` bash
 $ wget https://raw.github.com/ros/ros_tutorials/kinetic-devel/rospy_tutorials/001_talker_listener/talker.py
 $ chmod +x talker.py
@@ -37,8 +41,11 @@ $ chmod +x listener.py
 ```
 For the Service and Client samples in the tutorial, I got error: "ImportError: No module named beginner_tutorials.srv" when trying to run it, found [this link](https://answers.ros.org/question/114806/tutorial-116-importerror-no-module-named-beginner_tutorialssrv-with-catkin-system-build/) helpful.
 
+
+## Build workspace
+
 Build the workspace:
-```
+``` bash
 $ cd ~/catkin_ws
 $ catkin_make # need to do this everytime after changing the folder structure
 
@@ -46,12 +53,15 @@ $ catkin_make # need to do this everytime after changing the folder structure
 $ catkin_make [--only-pkg-with-deps]() <target_package>
 ```
 
-Run the program:
-```
+## Run node
+
+After starting ROS with `roscore` in a terminal, Run your node in another terminal:
+``` bash
 # rosrun <package_name> <file_name>
 $ rosrun beginner_tutorials talker.py
 ```
 
+## Checking information from command line
 
 ``` bash
 # show all ros topic
@@ -72,3 +82,9 @@ $ roslaunch-logs
 # to open the directory in GUI
 $ nautilus <directory>
 ```
+
+## Launch file
+`<group>`: launch a group of nodes. Use ns attribute to push nodes into a separate namespace.
+
+`<param>`: `<rosparam command="load" file="FILENAME" />` to load a YAML file.
+`<if="" name="" value="">`, change a parameter to some value if a condition is meet.

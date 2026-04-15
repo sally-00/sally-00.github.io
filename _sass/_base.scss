@@ -8,6 +8,21 @@ p, h1, h2, h3, h4, h5, h6, em, div, li, span, strong {
   color: var(--global-text-color);
 }
 
+body {
+  font-family: "Manrope", sans-serif;
+  line-height: 1.75;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Source Serif 4", serif;
+  letter-spacing: -0.02em;
+}
+
+p, li {
+  font-size: 1.02rem;
+}
+
 hr {
   border-top: 1px solid var(--global-divider-color);
 }
@@ -91,6 +106,50 @@ blockquote {
       color: var(--global-theme-color);
       text-decoration: none;
     }
+  }
+}
+
+.post-header {
+  margin-bottom: 2rem;
+
+  .post-title {
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 700;
+    line-height: 1.02;
+  }
+
+  .desc {
+    font-family: "Manrope", sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.01em;
+    color: var(--global-grey-color);
+  }
+}
+
+.post .clearfix {
+  h2 {
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.9rem;
+  }
+
+  h3 {
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.35rem;
+    font-weight: 700;
+  }
+
+  p + p {
+    margin-top: 0.9rem;
+  }
+
+  video {
+    display: block;
+    margin: 1rem 0 1.25rem;
+    border-radius: 14px;
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.12);
+    background: #000;
   }
 }
 

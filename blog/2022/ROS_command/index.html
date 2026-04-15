@@ -2,7 +2,7 @@
 <html lang="en">
 
   <!-- Head -->
-  <head><meta http-equiv="refresh" content="3; url=https://sally-00.github.io/" />        
+  <head>        
     <!-- Metadata, OpenGraph and Schema.org -->
     
 
@@ -10,9 +10,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Yi  Zhang | Page not found</title>
+    <title>Yi  Zhang | useful ROS command memo</title>
     <meta name="author" content="Yi  Zhang" />
-    <meta name="description" content="Looks like there has been a mistake. Nothing exists here." />
+    <meta name="description" content="project memo" />
     <meta name="keywords" content="yi-zhang, osaka-university, berkeley" />
 
 
@@ -33,7 +33,7 @@
     <!-- Styles -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
     <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="canonical" href="https://sally-00.github.io/404.html">
+    <link rel="canonical" href="https://sally-00.github.io/blog/2022/ROS_command/">
 
     <!-- Dark Mode -->
     <script src="/assets/js/theme.js"></script>
@@ -92,20 +92,101 @@
 
     <!-- Content -->
     <div class="container mt-5">
-      <!-- page.html -->
-        <div class="post">
+      <!-- _layouts/post.html -->
 
-          <header class="post-header">
-            <h1 class="post-title">Page not found</h1>
-            <p class="post-description">Looks like there has been a mistake. Nothing exists here.</p>
-          </header>
+<div class="post">
 
-          <article>
-            <p>You will be redirected to the main page within 3 seconds. If not redirected, please click <a href="https://sally-00.github.io/">here</a>.</p>
+  <header class="post-header">
+    <h1 class="post-title">useful ROS command memo</h1>
+    <p class="post-meta">October 5, 2022</p>
+    <p class="post-tags">
+      <a href="/blog/2022"> <i class="fas fa-calendar fa-sm"></i> 2022 </a>
+        ·  
+        <a href="/blog/tag/ROS">
+          <i class="fas fa-hashtag fa-sm"></i> ROS</a>  
+          
 
-          </article>
+    </p>
+  </header>
 
-        </div>
+  <article class="post-content">
+    <h2 id="create-packages">Create packages</h2>
+
+<p>Create a package:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># catkin_create_pkg &lt;package_name&gt; [depend1] [depend2] [depend3]</span>
+<span class="nv">$ </span>catkin_create_pkg pkg_name std_msgs rospy roscpp
+</code></pre></div></div>
+<p>Package dependencies are stored in package.xml
+Navigate to the package directory:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># roscd &lt;package_name&gt;</span>
+<span class="nv">$ </span>roscd pkg_name
+</code></pre></div></div>
+<p>Copy files from other package:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>roscp <span class="o">[</span>package_name] <span class="o">[</span>file_to_copy_path] <span class="o">[</span>copy_from_this_path]
+</code></pre></div></div>
+
+<h2 id="publishing-and-subscribing">Publishing and subscribing</h2>
+
+<p>Publish using command line</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>rostopic pub &lt;name of the topic&gt; &lt;<span class="nb">type </span>of the topic&gt; <span class="o">[</span>args...]
+<span class="c"># press TAB after rostopic pub &lt;name of the topic&gt; &lt;type of the topic&gt;, it auto fills the information needed</span>
+</code></pre></div></div>
+
+<p>Publisher, subscriber and other examples in python are available. Download as follows:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>wget https://raw.github.com/ros/ros_tutorials/kinetic-devel/rospy_tutorials/001_talker_listener/talker.py
+<span class="nv">$ </span><span class="nb">chmod</span> +x talker.py
+<span class="nv">$ </span>wget https://raw.github.com/ros/ros_tutorials/kinetic-devel/rospy_tutorials/001_talker_listener/listener.py
+<span class="nv">$ </span><span class="nb">chmod</span> +x listener.py
+</code></pre></div></div>
+<p>For the Service and Client samples in the tutorial, I got error: “ImportError: No module named beginner_tutorials.srv” when trying to run it, found <a href="https://answers.ros.org/question/114806/tutorial-116-importerror-no-module-named-beginner_tutorialssrv-with-catkin-system-build/" target="_blank" rel="noopener noreferrer">this link</a> helpful.</p>
+
+<h2 id="build-workspace">Build workspace</h2>
+
+<p>Build the workspace:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> ~/catkin_ws
+<span class="nv">$ </span>catkin_make <span class="c"># need to do this everytime after changing the folder structure</span>
+
+<span class="c"># to build only one package</span>
+<span class="nv">$ </span>catkin_make <span class="o">[</span><span class="nt">--only-pkg-with-deps</span><span class="o">]()</span> &lt;target_package&gt;
+</code></pre></div></div>
+
+<h2 id="run-node">Run node</h2>
+
+<p>After starting ROS with <code class="language-plaintext highlighter-rouge">roscore</code> in a terminal, Run your node in another terminal:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># rosrun &lt;package_name&gt; &lt;file_name&gt;</span>
+<span class="nv">$ </span>rosrun beginner_tutorials talker.py
+</code></pre></div></div>
+
+<h2 id="checking-information-from-command-line">Checking information from command line</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># show all ros topic</span>
+<span class="nv">$ </span>rostopic list
+<span class="c"># to check specific topic</span>
+<span class="nv">$ </span>rostopic list | <span class="nb">grep</span> &lt;topic_name&gt;
+<span class="c"># show message type, subscriber, publisher</span>
+<span class="nv">$ </span>rostopic info &lt;name of the topic&gt;
+<span class="c"># to measure the frequency of the image topic</span>
+<span class="nv">$ </span>rostopic hz &lt;topic_name&gt;
+<span class="c"># show what is included in a topic</span>
+<span class="nv">$ </span>rosmsg show &lt;a topic <span class="nb">type</span><span class="o">&gt;</span>
+<span class="c"># to display an image</span>
+<span class="nv">$ </span>rqt_image_view &lt;topic_name&gt;
+
+<span class="c"># check ros launch logs (especially when there is an error), this shows the directory</span>
+<span class="nv">$ </span>roslaunch-logs
+<span class="c"># to open the directory in GUI</span>
+<span class="nv">$ </span>nautilus &lt;directory&gt;
+</code></pre></div></div>
+
+<h2 id="launch-file">Launch file</h2>
+<p><code class="language-plaintext highlighter-rouge">&lt;group&gt;</code>: launch a group of nodes. Use ns attribute to push nodes into a separate namespace.</p>
+
+<p><code class="language-plaintext highlighter-rouge">&lt;param&gt;</code>: <code class="language-plaintext highlighter-rouge">&lt;rosparam command="load" file="FILENAME" /&gt;</code> to load a YAML file.
+<code class="language-plaintext highlighter-rouge">&lt;if="" name="" value=""&gt;</code>, change a parameter to some value if a condition is meet.</p>
+
+  </article>
+
+</div>
 
     </div>
 
